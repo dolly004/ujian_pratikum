@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Koneksi;
 
 /**
  *
@@ -89,7 +90,7 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,21 +130,23 @@ public class Login extends javax.swing.JFrame {
         String Password = this.password.getText();
         
         if (Username.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Isi Username Terlebih Dahulu","Peringatan", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Isi Username Terlebih Dahulu!","Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
            }
         if (Password.isEmpty()){
-               JOptionPane.showMessageDialog(this,"Isi Password Terlebih Dahulu","Peringatan", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Isi Password Terlebih Dahulu!","Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
            }
            String query = "select * from user where nama_user =? and password =?";
                PreparedStatement pst;
         try {
-            pst = Koneksi.Koneksi().prepareStatement(query);
+             pst = Koneksi.Koneksi().prepareStatement(query);
                pst.setString(1, Username);
-               pst.setString(2,Password);
+               pst.setString(2, Password);
             ResultSet rs = pst.executeQuery();
         if (rs.next()) {
             String role = rs.getString("role");
-        if (role.equals("administrator")) { 
+        if (role.equals("administrator")){
                 new Dashboard().setVisible(true);
                 this.dispose();
         } else {
@@ -151,7 +154,7 @@ public class Login extends javax.swing.JFrame {
                 this.dispose();
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Username atau password salah.");
+             JOptionPane.showMessageDialog(this, "Username atau Password Salah!","Peringatan", JOptionPane.WARNING_MESSAGE);
         }
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -192,7 +195,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

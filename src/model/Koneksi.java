@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Form;
-
+package model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author Client
@@ -32,7 +30,7 @@ public class Koneksi {
         try {
             Conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(model.Koneksi.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
